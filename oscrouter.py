@@ -21,6 +21,7 @@ print()
 
 def create_handler(route_clients):
     def handler(addr, args):
+        # print(addr, args, route_clients)
         for client in route_clients:
             client.send_message(addr, args)
     return handler
@@ -31,7 +32,7 @@ dispatcher = dispatcher.Dispatcher()
 for route in config["routes"].keys():
     route_clients = config["routes"][route]
     print(f"+ add {route_clients} to route {route}")
-    dispatcher.map(route, create_handler(route_clients))
+    dispatcher.map(route, create_handler(list(map(lambda x: clients[x], route_clients))))
 print()
 
 server = osc_server.ThreadingOSCUDPServer(
