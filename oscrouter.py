@@ -20,7 +20,7 @@ for client in config["clients"]:
 print()
 
 def create_handler(route_clients):
-    def handler(addr, args):
+    def handler(addr, *args):
         # print(addr, args, route_clients)
         for client in route_clients:
             client.send_message(addr, args)
