@@ -11,3 +11,8 @@ usage:
 * `routes`: list of routes. Specify OSC message path and list of clients (refer to names from `clients` section). You can use wildcards (`*` and `?`) in route path.
 
 See config example.
+
+## Requirements
+
+* https://pyyaml.org/
+* https://pypi.org/project/python-osc/
