@@ -2,7 +2,7 @@
 
 usage:
 
-`python3 oscrouter.py --config <config path>`
+`./oscrouter.py --config <config path>`
 
 ## Config format:
 

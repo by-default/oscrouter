@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from pythonosc import dispatcher
 from pythonosc import osc_server
 from pythonosc import udp_client
