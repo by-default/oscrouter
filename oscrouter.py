@@ -9,10 +9,16 @@ import argparse
 import yaml
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--config", default="config.yaml", help="Config file")
+parser.add_argument("--config", default="/etc/oscrouter/config.yaml", help="Config file")
 args = parser.parse_args()
 
-config = yaml.load(open(args.config, "r"))
+config = yaml.load(open(args.config, "r"), Loader=yaml.SafeLoader)
+
+debug = False
+
+if "debug" in config and config["debug"]:
+    debug = True
+    print("debug is on")
 
 # print(config)
 clients = {}
@@ -23,13 +29,14 @@ print()
 
 def create_handler(route_clients):
     def handler(addr, *args):
-        # print(addr, args, route_clients)
+        if debug:
+            print(addr, args, route_clients)
         for client in route_clients:
             client.send_message(addr, args)
     return handler
 
 dispatcher = dispatcher.Dispatcher()
-# dispatcher.set_default_handler(print)
+dispatcher.set_default_handler(print)
 
 for route in config["routes"].keys():
     route_clients = config["routes"][route]

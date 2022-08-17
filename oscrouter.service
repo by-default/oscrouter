@@ -1,0 +1,14 @@
+[Unit]
+Description=OSC router
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/oscrouter
+Restart=always
+RestartSec=2
+User=pi
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
+
